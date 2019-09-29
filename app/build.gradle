@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.application'
+    id 'com.gladed.androidgitversion' version '0.4.10'
+}
+
+androidGitVersion {
+    baseCode 1000000000
+    codeFormat 'MNNPP'
+    format '%tag%%-count%%-commit%%-branch%'
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.kvdheijden.soundcheck"
+        minSdkVersion 15
+        targetSdkVersion 29
+        versionName androidGitVersion.name()
+        versionCode androidGitVersion.code()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
